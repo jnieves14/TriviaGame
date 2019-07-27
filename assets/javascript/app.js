@@ -41,12 +41,6 @@
             choice: ["Islamabad, Pakistan", "Seoul, South Korea", "Christiansburg, VA, USA", "Jersusalem",],
             answer: 0,
             photo: "assets/images/islamabad.jpg"
-        }, 
-        {
-            question: "Which fruit contains the most protein per 100 calories?", 
-            choice: ["Guava", "Avocado", "Banana", "Blackberries" ],
-            answer: 0,
-            photo: "assets/images/guava.gif"
         }];
     
     var correctCount = 0;
