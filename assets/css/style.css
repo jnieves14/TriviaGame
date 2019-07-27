@@ -1,0 +1,78 @@
+.answerchoice {
+	border: 1px solid black;
+    border-radius: 5%;
+	width: 40%;
+	color: black;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 20px;
+    background-color: white;
+}
+
+img {
+  max-height: 250px;
+  width: auto;
+}
+
+#answerblock {
+  text-align: center;
+}
+
+#questionblock {
+  text-align: center;
+  font-weight: bold;
+}
+
+#reset {
+  visibility: visible;
+}
+
+body {
+  background-image: url("../images/background2.png");
+  background-size: cover;
+  font-family: 'Special Elite', cursive;
+}
+
+h1 {
+  text-align: center;
+  color: black;
+  font-weight: bolder;
+  padding: 20px;
+  font-size: 45px;
+}
+
+p {
+  margin: 10px;
+  font-weight: bold;
+  color: red;
+  font-size: 20px;
+}
+
+h2, h4 {
+  margin: 30px;
+  font-weight: bold;
+}
+
+#title {
+    padding: 20px;
+    margin: 20px;
+    border-style: double;
+    border-color: black;
+    background-image: url("../images/clouds.jpg")
+}
+
+.wrapper {
+  margin: 30px auto;
+  height: 500px;
+  width: 60%;
+  text-align: center;
+}
+
+.btn {
+  position: relative;
+  height: 100px;
+  width: 250px;
+  bottom: -100px;
+  border-style: double;
+  border-color: black;
+}
