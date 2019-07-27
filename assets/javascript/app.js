@@ -5,14 +5,14 @@
             choice: ["Tokyo, Japan","Shanghai, China","New York City, NY, USA", "New Delhi, India"],
             answer: 0,
             photo: "assets/images/tokyo-japan.jpg"
-         },
-         {
+        },
+        {
             question: "Which city is the richest(based on # of billionaires)?", 
             choice: ["Seoul, South Korea", "Hong Kong","New York, NY, USA", "Beijing, China"],
             answer: 2,
             photo: "assets/images/NY-NY.jpg"
-         }, 
-         {
+        }, 
+        {
             question: "Which city had the world's tallest roller coaster?", 
             choice: ["Gold Coast, Queensland, Australia", "Salou, Catalonia, Spain", "Vaughan, Ontario, Canada,", "Jackson, NJ, USA"],
             answer: 3,
@@ -45,7 +45,7 @@
     
     var correctCount = 0;
     var wrongCount = 0;
-    var unanswerCount = 0;
+    var unansweredCount = 0;
     var timer = 20;
     var intervalId;
     var userGuess ="";
@@ -56,76 +56,74 @@
     var newArray = [];
     var holder = [];
     
-    
-    
+
     $("#reset").hide();
+
     //click start button to start game
     $("#start").on("click", function () {
-            $("#start").hide();
-            displayQuestion();
-            runTimer();
-            for(var i = 0; i < options.length; i++) {
+        $("#start").hide();
+        displayQuestion();
+        runTimer();
+        for(var i = 0; i < options.length; i++) {
         holder.push(options[i]);
     }
-        })
-    //timer start
+    })
+
+    //srart timer function - counts down by 1 second 
     function runTimer(){
         if (!running) {
         intervalId = setInterval(decrement, 1000); 
         running = true;
         }
     }
-    //timer countdown
+    //display the time remaining when timer starts its countdown
     function decrement() {
         $("#timeleft").html("<h3>Time remaining: " + timer + "</h3>");
         timer --;
     
-        //stop timer if reach 0
+        //stop the time once it reaches zero, increase unanswered count since user did not select an answer in time
         if (timer === 0) {
-            unanswerCount++;
+            unansweredCount++;
             stop();
+            //display the correct answer to the user
             $("#answerDiv").html("<p>Time is up! The correct answer is: " + pick.choice[pick.answer] + "</p>");
             hidepicture();
         }	
     }
     
-    //timer stop
+    //function to stop timer
     function stop() {
         running = false;
         clearInterval(intervalId);
     }
-    //randomly pick question in array if not already shown
-    //display question and loop though and display possible answers
+
+    //randomly display a question from the array
     function displayQuestion() {
+
         //generate random index in array
         index = Math.floor(Math.random()*options.length);
         pick = options[index];
     
-    //	if (pick.shown) {
-    //		//recursive to continue to generate new index until one is chosen that has not shown in this game yet
-    //		displayQuestion();
-    //	} else {
-    //		console.log(pick.question);
             //iterate through answer array and display
             $("#questionDiv").html("<h2>" + pick.question + "</h2>");
             for(var i = 0; i < pick.choice.length; i++) {
                 var userChoice = $("<div>");
                 userChoice.addClass("answerchoice");
                 userChoice.html(pick.choice[i]);
+
                 //assign array position to it so can check answer
                 userChoice.attr("data-guessvalue", i);
                 $("#answerDiv").append(userChoice);
-    //		}
     }
     
     
-    
-    //click function to select answer and outcomes
+    //on click function to select answer and outcomes
     $(".answerchoice").on("click", function () {
+
         //grab array position from userGuess
         userGuess = parseInt($(this).attr("data-guessvalue"));
     
-        //correct guess or wrong guess outcomes
+        //compare the user guress to the correct answer. If its correct, increase correct count
         if (userGuess === pick.answer) {
             stop();
             correctCount++;
@@ -133,6 +131,7 @@
             $("#answerDiv").html("<p>That's rigtht!!</p>");
             hidepicture();
     
+        //when user guess does not equal correct guess, increase wrong count
         } else {
             stop();
             wrongCount++;
@@ -153,17 +152,17 @@
             $("#answerDiv").empty();
             timer= 20;
     
-        //run the score screen if all questions answered
-        if ((wrongCount + correctCount + unanswerCount) === qCount) {
+        //once all questions have been answered, show the scoreboard
+        if ((wrongCount + correctCount + unansweredCount) === qCount) {
             $("#questionDiv").empty();
             // $("#questionDiv").html("<h4>Game Over!  Here's how you did: </h4>");
             $("#answerDiv").append("<h4> Correct: " + correctCount + "</h4>" );
             $("#answerDiv").append("<h4> Incorrect: " + wrongCount + "</h4>" );
-            $("#answerDiv").append("<h4> Unanswered: " + unanswerCount + "</h4>" );
+            $("#answerDiv").append("<h4> Unanswered: " + unansweredCount + "</h4>" );
             $("#reset").show();
             correctCount = 0;
             wrongCount = 0;
-            unanswerCount = 0;
+            unansweredCount = 0;
     
         } else {
             runTimer();
